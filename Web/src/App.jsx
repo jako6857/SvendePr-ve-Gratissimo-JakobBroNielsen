@@ -9,11 +9,17 @@ import MinSide from "./pages/MinSide.jsx";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Forside />} />
-      <Route path="/" element={<LogInd />} />
-      <Route path="/opret-profil" element={<OpretProfil />} />
-      <Route path="/opret-annonce" element={<OpretAnnonce />} />
-    </Routes>
+    <>
+      <header />
+      <Routes>
+        <Route path="/" element={<Forside />} />
+        <Route path="/" element={<LogInd />} />
+        <Route path="/opret-profil" element={<OpretProfil />} />
+        <Route path="/opret-annonce" element={<OpretAnnonce />} />
+      </Routes>
+      <footer />
+    </>
   );
 }
+
+export default app;
