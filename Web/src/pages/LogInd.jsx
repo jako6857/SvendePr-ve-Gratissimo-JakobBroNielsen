@@ -43,3 +43,5 @@ export function LogInd() {
     </form>
   );
 }
+
+export default LogInd;
