@@ -39,6 +39,7 @@ export function LogInd() {
       {error && <p>{error}</p>}
 
       <button type="submit">Log ind</button>
+      <button type="submit">Opret Bruger</button>
     </form>
   );
 }
