@@ -1,0 +1,64 @@
+@use "_variables" as *;
+
+h2 {
+  font-weight: 300;
+}
+
+.news-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0 4rem 0;
+}
+
+.news-section {
+  display: flex;
+  background-color: $alternativ-hvid;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: $primary-black;
+  background-color: $primary-white;
+  border: 1px solid #333333; //hardkodet grå farve, for at undgå opacity problemer igen igen (opcity er ikke idielt, når vi arbejder med borders)
+  border-radius: 14px;
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.news-meta {
+  margin: 1rem 1rem 0.5rem;
+  font-size: 0.85rem;
+  color: $secondary-red;
+}
+
+.news-title {
+  margin: 0 1rem 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $primary-black;
+  line-height: 1.4;
+}

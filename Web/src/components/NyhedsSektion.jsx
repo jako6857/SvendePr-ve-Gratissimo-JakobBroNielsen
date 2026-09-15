@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getArticleData } from "../api/articles";
+import "../scss/NewsSection.scss";
 
 //vores funtion til at hente 3 tilfældige artikler fra vores api
 //samt bruger vi ... (spread Operator) for at lave en kopi af arrayet, så vi ikke ændrer på det originale array
@@ -8,6 +9,13 @@ import { getArticleData } from "../api/articles";
 function getRandomThree(articles) {
   const shuffled = [...articles].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, 3);
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.getMonth() + 1; //+1 fordi getMonth() returnere 0-11
+  return `d. ${day}/${month}`; //vi bruger `` fordi det er en string hvor vi skal bruge variabler
 }
 
 function NewsSection() {
@@ -21,21 +29,27 @@ function NewsSection() {
   }, []);
 
   return (
-    <section className="news-section">
-      <h2>Udvalgte Nyheder</h2>
-
-      <div className="news-grid">
-        {featuredArticles.map((article) => (
-          <Link
-            to={`/nyheder/${article.id}`}
-            key={article.id}
-            className="news-card"
-          >
-            <img src={article.imageUrl} alt={article.title} />
-            <p className="news-meta">{article.author}</p>
-            <h3>{article.title}</h3>
-          </Link>
-        ))}
+    <section className="news-section ">
+      <div className="news-container container">
+        <h2>Udvalgte Nyheder</h2>
+        <div className="news-grid">
+          {featuredArticles.map((article) => (
+            <Link
+              to={`/nyheder/${article.id}`}
+              key={article.id}
+              className="news-card"
+            >
+              <img
+                src={`http://localhost:4000${article.imageUrl}`}
+                alt={article.title}
+              />
+              <p className="news-meta">
+                {formatDate(article.createdAt)} - {article.author}
+              </p>
+              <p className="news-title">{article.title}</p>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

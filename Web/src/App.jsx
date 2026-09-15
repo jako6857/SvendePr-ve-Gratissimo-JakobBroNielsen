@@ -22,19 +22,17 @@ function App() {
       <Header />
       <NavBar user={user} logout={logout} />
       {!user && <CtaBanner />}
-      <SearchBar />
-      <CategoryGrid />
-      <NewsSection />
-      <Footer />
+
       <Routes>
         <Route path="/" element={<Forside />} />
         <Route path="/alle-jobs" element={<AlleJobs />} />
-        <Route path="/nyheder" element={<NyhedsPage />} />
+        <Route path="/nyheder/:id" element={<NyhedsPage />} />
         <Route path="/min-side" element={<MinSide />} />
         <Route path="/log-ind" element={<LogInd login={login} />} />
         <Route path="/opret-profil" element={<OpretProfil />} />
         <Route path="/opret-annonce" element={<OpretAnnonce />} />
       </Routes>
+      <Footer />
     </>
   );
 }
