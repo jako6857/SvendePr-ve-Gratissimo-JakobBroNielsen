@@ -1,5 +1,11 @@
+import { Link } from "react-router-dom";
+
 function Forside() {
-  return <h1>Forside</h1>;
+  return (
+    <>
+      <section className="hero"></section>
+    </>
+  );
 }
 
 export default Forside;

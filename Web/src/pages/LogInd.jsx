@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
 
-export function LogInd() {
+export function LogInd({ login }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login, logout } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

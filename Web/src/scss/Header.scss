@@ -1,0 +1,20 @@
+@use "_variables" as *;
+
+.header {
+  height: 133px;
+  background-color: $primary-red;
+
+  padding: 0px;
+  margin: 0px;
+
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  img {
+    width: 323px;
+    height: 108px;
+    padding: 16px 8px;
+  }
+}

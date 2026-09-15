@@ -1,0 +1,60 @@
+@use "_variables" as *;
+
+.navbar {
+  height: 65px;
+  background-color: $secondary-red;
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    font-family: $font-primary;
+    color: $primary-white;
+    font-size: 16px;
+    padding: 0px 16px;
+    font-weight: 400;
+    margin: 0px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  a.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  body {
+    margin: 0px;
+    padding: 16px 8px;
+  }
+
+  .divider {
+    width: 2px;
+    height: 38px;
+    background-color: $primary-white;
+  }
+
+  .nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .alwaysbold,
+  .alwaysbold a {
+    font-weight: bold;
+  }
+}
