@@ -12,6 +12,7 @@ import Header from "./components/Header.jsx";
 import CtaBanner from "./components/CtaBanner.jsx";
 import Footer from "./components/Footer.jsx";
 import SearchBar from "./components/SearchBar.jsx";
+import CategoryGrid from "./components/CategoryGrid.jsx";
 
 function App() {
   const { user, login, logout } = useAuth();
@@ -21,6 +22,7 @@ function App() {
       <NavBar user={user} logout={logout} />
       {!user && <CtaBanner />}
       <SearchBar />
+      <CategoryGrid />
       <Footer />
       <Routes>
         <Route path="/" element={<Forside />} />

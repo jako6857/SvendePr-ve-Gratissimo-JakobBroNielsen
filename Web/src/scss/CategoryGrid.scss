@@ -1,0 +1,39 @@
+@import "variables";
+
+.category-grid-section {
+  padding: 40px;
+  background-color: $primary-white;
+
+  h2 {
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: 300;
+    color: $primary-black;
+  }
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $alternativ-hvid;
+  border-radius: 14px 14px;
+  padding: 16px 8px;
+  background-color: $primary-white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 300;
+  color: $primary-black;
+}
+.category-count {
+  background-color: $alternativ-hvid;
+  border-radius: 14px 14px;
+  padding: 16px 8px;
+  font-size: 13px;
+}
