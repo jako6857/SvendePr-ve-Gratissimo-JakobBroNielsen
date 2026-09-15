@@ -1,10 +1,16 @@
 @use "_variables" as *;
 
+img {
+  width: 42px;
+  height: 42px;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 40px;
+  padding-top: 64px;
   background-color: $primary-red;
 
   .container {
@@ -16,5 +22,39 @@ footer {
     text-decoration: none;
     color: $primary-white;
     font-family: $font-primary;
+  }
+  li {
+    list-style: none;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    color: $primary-white;
+    margin-bottom: 8px;
+  }
+
+  .nyhedsbrev-form input {
+    height: 36px;
+    border-radius: 12px 0 0 12px;
+    border: none;
+    background-color: $primary-white;
+    padding: 0 10px;
+  }
+
+  .nyhedsbrev-form button {
+    background-color: $secondary-red;
+    color: $alternativ-hvid;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+  }
+
+  h4 {
+    font-weight: 600;
+    size: 14px;
+    font-style: semibold;
+    color: $primary-white;
+    margin-bottom: 16px;
   }
 }
