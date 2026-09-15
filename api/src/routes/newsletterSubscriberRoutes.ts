@@ -14,7 +14,6 @@ router.get(
 );
 router.post(
   "/newsletter",
-  authController.authorize,
   newsletterSubscriberController.createNewsletterSubscriber,
 );
 router.put(
