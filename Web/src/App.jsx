@@ -13,6 +13,7 @@ import CtaBanner from "./components/CtaBanner.jsx";
 import Footer from "./components/Footer.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import CategoryGrid from "./components/CategoryGrid.jsx";
+import NewsSection from "./components/NyhedsSektion.jsx";
 
 function App() {
   const { user, login, logout } = useAuth();
@@ -23,6 +24,7 @@ function App() {
       {!user && <CtaBanner />}
       <SearchBar />
       <CategoryGrid />
+      <NewsSection />
       <Footer />
       <Routes>
         <Route path="/" element={<Forside />} />

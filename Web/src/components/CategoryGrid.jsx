@@ -36,7 +36,7 @@ function CategoryGrid() {
             className="category-card"
             onClick={() => handleCategoryClick(category.id)}
           >
-            <span>{category.name}</span>
+            <span className="category-name">{category.name}</span>
             <span className="category-count">
               {countJobsPerCategory(jobs, category.id)}
             </span>
