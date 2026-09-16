@@ -32,7 +32,8 @@ function NewsSection({ amount = 3 }) {
   return (
     <section className="news-section ">
       <div className="news-container container">
-        <h2>Udvalgte Nyheder</h2>
+        {/** Hvis amount er 6 eller mere, vis "Alle Nyheder", ellers vis "Udvalgte Nyheder" */}
+        {amount >= 6 ? <h2>Alle Nyheder</h2> : <h2>Udvalgte Nyheder</h2>}
         <div className="news-grid">
           {featuredArticles.map((article) => (
             <Link
