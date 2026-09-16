@@ -17,7 +17,23 @@ export class JobCategoryController {
       where: { id },
       include: {
         jobListings: {
-          include: { region: true, workType: true, jobCategory: true },
+          include: {
+            region: true,
+            workType: true,
+            jobCategory: true,
+            user: {
+              select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                email: true,
+                phone: true,
+                address: true,
+                city: true,
+                zipcode: true,
+              },
+            },
+          },
         },
       },
     });

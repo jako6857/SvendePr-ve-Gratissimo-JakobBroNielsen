@@ -1,5 +1,11 @@
+import SearchBar from "../components/SearchBar";
+
 function AlleJobs() {
-  return <h1>Alle Jobs</h1>;
+  return (
+    <>
+      <SearchBar />
+    </>
+  );
 }
 
 export default AlleJobs;

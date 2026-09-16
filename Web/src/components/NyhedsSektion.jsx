@@ -12,7 +12,7 @@ function getRandomAmount(articles, amount) {
   return shuffled.slice(0, amount);
 }
 
-function formatDate(dateString) {
+export function formatDate(dateString) {
   const date = new Date(dateString);
   const day = date.getDate();
   const month = date.getMonth() + 1; //+1 fordi getMonth() returnere 0-11

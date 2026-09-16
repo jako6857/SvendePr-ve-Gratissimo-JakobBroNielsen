@@ -11,9 +11,6 @@ import NavBar from "./components/NavBar.jsx";
 import Header from "./components/Header.jsx";
 import CtaBanner from "./components/CtaBanner.jsx";
 import Footer from "./components/Footer.jsx";
-import SearchBar from "./components/SearchBar.jsx";
-import CategoryGrid from "./components/CategoryGrid.jsx";
-import NewsSection from "./components/NyhedsSektion.jsx";
 
 function App() {
   const { user, login, logout } = useAuth();

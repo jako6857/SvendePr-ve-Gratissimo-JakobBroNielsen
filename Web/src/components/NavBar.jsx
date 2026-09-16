@@ -8,9 +8,9 @@ function NavBar({ user, logout }) {
     <nav className="navbar">
       <div className="container ">
         <div>
-          <NavLink to="Alle Jobs">Alle Jobs</NavLink>
-          <NavLink to="Opret Annonce">Opret Annonce</NavLink>
-          <NavLink to="Nyheder">Nyheder</NavLink>
+          <NavLink to="alle-jobs">Alle Jobs</NavLink>
+          <NavLink to="opret-annonce">Opret Annonce</NavLink>
+          <NavLink to="nyheder">Nyheder</NavLink>
         </div>
         {user && (
           <div className="nav-auth alwaysbold">
