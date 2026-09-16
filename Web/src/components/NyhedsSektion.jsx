@@ -6,9 +6,10 @@ import "../scss/NewsSection.scss";
 //vores funtion til at hente 3 tilfældige artikler fra vores api
 //samt bruger vi ... (spread Operator) for at lave en kopi af arrayet, så vi ikke ændrer på det originale array
 //og slice gør bare at vi tage de første 3 elemter fra det array vi lige har blandet
-function getRandomThree(articles) {
+
+function getRandomAmount(articles, amount) {
   const shuffled = [...articles].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 3);
+  return shuffled.slice(0, amount);
 }
 
 function formatDate(dateString) {
@@ -17,14 +18,14 @@ function formatDate(dateString) {
   const month = date.getMonth() + 1; //+1 fordi getMonth() returnere 0-11
   return `d. ${day}/${month}`; //vi bruger `` fordi det er en string hvor vi skal bruge variabler
 }
-
-function NewsSection() {
+function NewsSection({ amount = 3 }) {
   const [featuredArticles, setFeaturedArticles] = useState([]);
 
   useEffect(() => {
     //getArticleData henter vi fra api/articles.js, hvor vi har logikken til at hente de oprigtige artikler fra api.
     getArticleData("articles").then((data) => {
-      setFeaturedArticles(getRandomThree(data));
+      setFeaturedArticles(getRandomAmount(data, amount));
+      console.log(amount);
     });
   }, []);
 
