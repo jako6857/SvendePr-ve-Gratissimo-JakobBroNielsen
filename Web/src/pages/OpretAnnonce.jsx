@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getJobData, createJob } from "../api/jobs.js";
+import usejobForm from "../hooks/useJobs.js";
 
 function OpretAnnonce() {
   const { categories, regions, workTypes, loading, error, submitJobForm } =

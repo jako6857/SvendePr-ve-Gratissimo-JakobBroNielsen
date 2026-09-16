@@ -1,16 +1,28 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { getArticleData } from "../api/articles";
 import "../scss/NavBar.scss";
 
 //vi bruger Link så vi er fri for at genindlæse siden, når vi navigerer rundt i vores app.
 
 function NavBar({ user, logout }) {
+  const navigate = useNavigate();
+
+  const goToRandomArticle = async (event) => {
+    event.preventDefault();
+    const articles = await getArticleData("articles");
+    const random = articles[Math.floor(Math.random() * articles.length)]; //finder en tilfældig artikel ved tryk på nyheder i navbaren.
+    navigate(`/nyheder/${random.id}`);
+  };
+
   return (
     <nav className="navbar">
       <div className="container ">
         <div>
           <NavLink to="alle-jobs">Alle Jobs</NavLink>
           <NavLink to="opret-annonce">Opret Annonce</NavLink>
-          <NavLink to="nyheder">Nyheder</NavLink>
+          <NavLink to="nyheder" onClick={goToRandomArticle}>
+            Nyheder
+          </NavLink>
         </div>
         {user && (
           <div className="nav-auth alwaysbold">

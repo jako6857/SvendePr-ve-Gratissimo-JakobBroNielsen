@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getjobData, createJob } from "../api/jobs.js";
+import { getJobData, createJob } from "../api/jobs.js";
 
 function usejobForm() {
   const [categories, setCategories] = useState([]);
@@ -11,11 +11,11 @@ function usejobForm() {
   useEffect(() => {
     async function fetchjobData() {
       try {
-        const [categoriesData, regionsData, workTypesData] = await promise.all([
+        const [categoriesData, regionsData, workTypesData] = await Promise.all([
           //vi bruger promise her så at vi kan hente alle 3 kategorier på en gang, sådan at vi ikke skal vente på hver enkelte bliverh hentet.
-          getjobData("categories"),
-          getjobData("regions"),
-          getjobData("workTypes"),
+          getJobData("categories"),
+          getJobData("regions"),
+          getJobData("workTypes"),
         ]);
         setCategories(categoriesData);
         setRegions(regionsData);

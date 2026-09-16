@@ -55,7 +55,7 @@ function SearchBar() {
     if (period) params.set("period", period);
     if (workHome) params.set("workHome", workHome);
 
-    navigate(`/jobs?${params.toString()}`);
+    navigate(`/alle-jobs?${params.toString()}`);
   };
 
   function HandleReset() {
@@ -65,7 +65,7 @@ function SearchBar() {
     setWorkType("");
     setPeriod("");
     setWorkHome("");
-    navigate("/jobs");
+    navigate("/alle-jobs");
   }
 
   return (

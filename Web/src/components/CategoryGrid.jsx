@@ -18,7 +18,7 @@ function CategoryGrid() {
   }, []);
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/jobs?category=${categoryId}`);
+    navigate(`/alle-jobs?category=${categoryId}`);
   };
 
   //vi bliver nødt til at lave sådan en kompliceret knap, da brugeren ikke bare skal sendes til statisk page, den skal rent faktisk..
