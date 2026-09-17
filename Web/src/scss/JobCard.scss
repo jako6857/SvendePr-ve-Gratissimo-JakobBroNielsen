@@ -1,3 +1,5 @@
+@use "_variables" as *;
+
 .job-card {
   display: flex;
   justify-content: space-between;
@@ -6,6 +8,21 @@
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+.job-card-left {
+  flex: 1;
+}
+
+.job-card-right {
+  width: 300px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .job-card p {
@@ -13,11 +30,32 @@
 }
 
 .job-card .org {
-  color: #999;
+  color: $alternativ-hvid;
   font-size: 0.85rem;
 }
 
 .job-card .actions {
   margin-top: 0.75rem;
   text-align: right;
+}
+
+.job-card button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 32px;
+  height: 32px;
+  padding: 8px 16px;
+  gap: 8px;
+  background-color: $alternativ-hvid;
+  border: 1px solid $primary-black;
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.button-icon {
+  height: 16px;
+  width: 16px;
 }

@@ -1,13 +1,30 @@
+@import "variables";
+
 .opret-annonce {
   display: flex;
   flex-direction: column;
   max-width: 40rem;
   gap: 0.25rem;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
 }
 
 .opret-annonce label {
   margin-top: 1rem;
   font-weight: 600;
+}
+
+.opret-annonce input,
+.opret-annonce textarea,
+.opret-annonce select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid $alternativ-hvid;
+  border-radius: 8px;
+  background: $alternativ-hvid;
+  font-size: 1rem;
 }
 
 /* felter med fejl markeres ud fra aria-invalid, så vi ikke skal sætte en klasse også */
@@ -20,6 +37,22 @@
   margin: 0.25rem 0 0;
   color: #c0392b;
   font-size: 0.875rem;
+}
+
+.opret-annonce button[type="submit"] {
+  width: 100%;
+  background: $primary-red;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+.opret-annonce button[type="submit"]:hover {
+  background: $secondary-red;
 }
 
 .opret-annonce .submit-error {

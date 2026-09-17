@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import "../scss/OpretProfil.scss";
 
 //formularen til at oprette en bruger. felterne kommer fra api dokumentationen
 //under Users -> Create User. de fire første er påkrævet, resten er valgfrie.
@@ -44,96 +46,87 @@ function OpretProfil({ signup }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Opret profil</h2>
-
-      <label>Fornavn</label>
-      <input
-        type="text"
-        value={firstname}
-        onChange={(e) => setFirstname(e.target.value)}
-        placeholder="Skriv dit fornavn..."
-        required
-      />
-
-      <label>Efternavn</label>
-      <input
-        type="text"
-        value={lastname}
-        onChange={(e) => setLastname(e.target.value)}
-        placeholder="Skriv dit efternavn..."
-        required
-      />
-
-      <label>Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Skriv din email..."
-        required
-      />
-
-      <label>Password</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Vælg et password..."
-        required
-      />
-
-      <label>Gentag password</label>
-      <input
-        type="password"
-        value={repeatPassword}
-        onChange={(e) => setRepeatPassword(e.target.value)}
-        placeholder="Skriv dit password igen..."
-        required
-      />
-
-      {/* herunder er de valgfrie felter ifølge api dokumentationen */}
-      <label>Telefon</label>
-      <input
-        type="tel"
-        value={phone}
-        onChange={(e) =>
-          setPhone(e.target.value.replace(/[^0-9]/g, "").slice(0, 8))
-        }
-        placeholder="Skriv dit telefon nummer..."
-      />
-
-      <label>Adresse</label>
-      <input
-        type="text"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Skriv din adresse..."
-      />
-
-      <label>Postnummer</label>
-      <input
-        type="text"
-        onChange={(e) =>
-          setZipcode(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))
-        }
-        value={zipcode}
-        placeholder="Skriv dit postnummer...  "
-      />
-
-      <label>By</label>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Skriv din by..."
-      />
-
-      {error && <p>{error}</p>}
-
-      <button type="submit">Opret profil</button>
-    </form>
+    <div className="opret-profil-page">
+      <form onSubmit={handleSubmit}>
+        <h2>Opret profil</h2>
+        <label>Fornavn</label>
+        <input
+          type="text"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+          placeholder="Skriv dit fornavn..."
+          required
+        />
+        <label>Efternavn</label>
+        <input
+          type="text"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+          placeholder="Skriv dit efternavn..."
+          required
+        />
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Skriv din email..."
+          required
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Vælg et password..."
+          required
+        />
+        <label>Gentag password</label>
+        <input
+          type="password"
+          value={repeatPassword}
+          onChange={(e) => setRepeatPassword(e.target.value)}
+          placeholder="Skriv dit password igen..."
+          required
+        />
+        {/* herunder er de valgfrie felter ifølge api dokumentationen */}
+        <label>Telefon</label>
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) =>
+            setPhone(e.target.value.replace(/[^0-9]/g, "").slice(0, 8))
+          }
+          placeholder="Skriv dit telefon nummer..."
+        />
+        <label>Adresse</label>
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Skriv din adresse..."
+        />
+        <label>Postnummer</label>
+        <input
+          type="text"
+          onChange={(e) =>
+            setZipcode(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))
+          }
+          value={zipcode}
+          placeholder="Skriv dit postnummer...  "
+        />
+        <label>By</label>
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Skriv din by..."
+        />
+        {error && <p>{error}</p>}
+        <button type="submit">Opret profil</button>
+      </form>
+      <Link to="/log-ind">Log ind</Link>
+    </div>
   );
 }
-
 export default OpretProfil;

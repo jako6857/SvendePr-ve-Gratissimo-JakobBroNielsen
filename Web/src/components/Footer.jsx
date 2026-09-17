@@ -1,12 +1,33 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { subscribeToNewsletter } from "../api/newsletter.js";
 import "../scss/Footer.scss";
+import React from "react";
 import LinkedIn from "../assets/LinkedIn.png";
 import Facebook from "../assets/Facebook.png";
 import Instagram from "../assets/Instagram.png";
 import Google from "../assets/Google.png";
 
 function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("form");
+
+  async function handleSubscribe(event) {
+    event.preventDefault();
+    try {
+      await subscribeToNewsletter(email);
+      setStatus("success");
+    } catch (error) {
+      //hvis email findes kan der gives et konkret svar til brugeren, og føre personen hurtigt videre.
+      if (error.message === "Email already exists") {
+        setStatus("exists");
+      } else {
+        console.error("Fejl ved tilmelding til nyhedsbrev:", error);
+        setStatus("error");
+      }
+    }
+  }
+
   return (
     <footer>
       <div className="container">
@@ -55,10 +76,23 @@ function Footer() {
         <div className="footer-newsletter">
           <h4>Vil du have jobs direkte i din indbakke?</h4>
           <p>Tilmeld dig vores elektroniske nyhedsbrev</p>
-          <form className="nyhedsbrev-form">
-            <input type="email" placeholder="@Indtast email..." />
-            <button type="submit">Tilmeld</button>
-          </form>
+
+          {(status === "form" || status === "error") && (
+            <form className="nyhedsbrev-form" onSubmit={handleSubscribe}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="@Indtast email..."
+                required
+              />
+              <button type="submit">Tilmeld</button>
+            </form>
+          )}
+
+          {status === "success" && <p>Tak! Du er nu tilmeldt nyhedsbrevet.</p>}
+          {status === "exists" && <p>Du er allerede tilmeldt nyhedsbrevet.</p>}
+          {status === "error" && <p>Noget gik galt. Prøv igen.</p>}
         </div>
         <div>
           <p>Fidusvej 23</p>

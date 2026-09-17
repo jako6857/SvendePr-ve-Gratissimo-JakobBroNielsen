@@ -3,15 +3,14 @@ import { useSearchParams } from "react-router-dom";
 import { getJobData } from "../api/jobs";
 import JobCard from "../components/JobCard";
 import { getFavorites, addFavorite, deleteFavorite } from "../api/favorites";
-
 import SearchBar from "../components/SearchBar";
+import "../scss/AlleJobs.scss";
 
 const workHomeById = { 1: "On-site", 2: "Remote", 3: "Hybrid" };
 const periodDaysById = { 1: 7, 2: 30, 3: 365 };
 
 function AlleJobs({ user }) {
   const [jobs, setJobs] = useState([]);
-  const [sortBy, setSortBy] = useState("newest");
   const [searchParams] = useSearchParams();
   const [favorites, setFavorites] = useState([]);
 
@@ -86,10 +85,8 @@ function AlleJobs({ user }) {
       );
       return new Date(job.createdAt) >= cutoff; //sammenligner job data
     })
-    .sort((a, b) =>
-      sortBy === "newest"
-        ? new Date(b.createdAt) - new Date(a.createdAt) //
-        : a.title.localeCompare(b.title),
+    .sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt), //sorterer efter nyeste først ALTID
     );
   //? : ternary Operators det betyder egentlig bare if else rundt regnet.
   //a og b er ligegyldigt man kunne skrive job1 og job2
@@ -98,12 +95,7 @@ function AlleJobs({ user }) {
     <>
       <SearchBar />
 
-      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-        <option value="newest">Nyeste</option>
-        <option value="alphabetical">Alfabetisk</option>
-      </select>
-
-      <div className="job-list">
+      <div className="job-list container">
         {visibleJobs.map((job) => (
           <JobCard
             key={job.id}

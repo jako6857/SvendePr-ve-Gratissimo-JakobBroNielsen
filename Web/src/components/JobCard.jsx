@@ -22,7 +22,7 @@ function JobCard({ job, user, favorite, onAddFavorite, onRemoveFavorite }) {
 
   return (
     <div className={isExpanded ? "job-card expanded" : "job-card"}>
-      <div>
+      <div className="job-card-left">
         <p className="organization">{job.organization}</p>
         <h2>{job.title}</h2>
         <p>{job.description}</p>
@@ -48,7 +48,7 @@ function JobCard({ job, user, favorite, onAddFavorite, onRemoveFavorite }) {
         )}
       </div>
 
-      <div>
+      <div className="job-card-right">
         <p>Lokation: {job.city}</p>
         <p>Indrykket: {new Date(job.createdAt).toLocaleDateString("da-DK")}</p>
 
@@ -69,7 +69,10 @@ function JobCard({ job, user, favorite, onAddFavorite, onRemoveFavorite }) {
               className="button-icon"
             />
           </button>
-          <button onClick={() => setIsExpanded(!isExpanded)}>
+          <button
+            className="button-Container"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
             {isExpanded ? "Luk" : "Åben"}
           </button>
         </div>
