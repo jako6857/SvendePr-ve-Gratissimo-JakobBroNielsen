@@ -33,7 +33,7 @@ function App() {
         />
         <Route path="/log-ind" element={<LogInd login={login} />} />
         <Route path="/opret-profil" element={<OpretProfil signup={signup} />} />
-        <Route path="/opret-annonce" element={<OpretAnnonce />} />
+        <Route path="/opret-annonce" element={<OpretAnnonce user={user} />} />
       </Routes>
       <Footer />
     </>

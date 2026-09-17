@@ -1,45 +1,77 @@
 import { useState } from "react";
-import { addFavorite, deleteFavorite } from "../api/favorites";
 import "../scss/JobCard.scss";
 
-function JobCard({ job, onOpen, user }) {
-  const [saved, setSaved] = useState(false);
+function JobCard({ job, user, favorite, onAddFavorite, onRemoveFavorite }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  async function handleSave() {
+  //saved er ikke state. den udregnes ud fra om der findes en favorit til jobbet
+  const saved = Boolean(favorite);
+
+  function handleToggleFavorite() {
     if (!user) {
       setShowLoginModal(true);
       return;
     }
-    try {
-      await addFavorite(job.id);
-      setSaved(true);
-    } catch (error) {
-      console.error("Fejl ved gemme favorit:", error);
+    if (favorite) {
+      onRemoveFavorite(favorite.id); //husk: favorittens id, ikke jobbets
+    } else {
+      onAddFavorite(job.id);
     }
   }
+
   return (
-    <div className="job-card">
+    <div className={isExpanded ? "job-card expanded" : "job-card"}>
       <div>
         <p className="organization">{job.organization}</p>
         <h2>{job.title}</h2>
         <p>{job.description}</p>
+
+        {/* alt herinde vises kun når kortet er foldet ud */}
+        {isExpanded && (
+          <>
+            <h3>Erfaring</h3>
+            <p>
+              Ingen særlig erfaring kræves, men gerne lyst til at hjælpe andre.
+            </p>
+
+            <h3>Arbejdsopgaver</h3>
+            <p>Varierende opgaver aftalt løbende med organisationen.</p>
+
+            <h3>Kontakt</h3>
+            <p>Tlf: {job.user.phone}</p>
+            <p>Email: {job.user.email}</p>
+            <p>
+              Att: {job.user.firstname} {job.user.lastname}
+            </p>
+          </>
+        )}
       </div>
 
       <div>
         <p>Lokation: {job.city}</p>
         <p>Indrykket: {new Date(job.createdAt).toLocaleDateString("da-DK")}</p>
 
+        {isExpanded && (
+          <>
+            <p>Kategori: {job.jobCategory.name}</p>
+            <p>Arbejdstid: {job.workType.type}</p>
+            <p>Hjemmearbejde: {job.workHome}</p>
+          </>
+        )}
+
         <div className="actions">
-          <button className="button-Container" onClick={handleSave}>
+          <button className="button-Container" onClick={handleToggleFavorite}>
             {saved ? "Fjern" : "Gem"}
             <img
               src={saved ? "/HeartFilled.png" : "/Heart.png"}
-              alt="gem knap hjerteform"
+              alt=""
               className="button-icon"
             />
           </button>
-          <button onClick={() => onOpen(job.id)}>Åben</button>
+          <button onClick={() => setIsExpanded(!isExpanded)}>
+            {isExpanded ? "Luk" : "Åben"}
+          </button>
         </div>
       </div>
 

@@ -13,7 +13,7 @@ function usejobForm() {
       try {
         const [categoriesData, regionsData, workTypesData] = await Promise.all([
           //vi bruger promise her så at vi kan hente alle 3 kategorier på en gang, sådan at vi ikke skal vente på hver enkelte bliverh hentet.
-          getJobData("categories"),
+          getJobData("job-categories"),
           getJobData("regions"),
           getJobData("workTypes"),
         ]);

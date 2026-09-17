@@ -13,7 +13,7 @@ async function getJobData(endpoint) {
 async function createJob(jobData) {
   const token = localStorage.getItem("accessToken");
 
-  const response = await fetch(`${API_URL}/jobs`, {
+  const response = await fetch(`${API_URL}/job-listings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,4 +28,17 @@ async function createJob(jobData) {
   return response.json();
 }
 
-export { getJobData, createJob };
+async function deleteJob(jobId) {
+  const token = localStorage.getItem("accessToken");
+
+  const response = await fetch(`${API_URL}/job-listings/${jobId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!response.ok) {
+    throw new Error("Kunne ikke slette annoncen");
+  }
+}
+
+export { getJobData, createJob, deleteJob };

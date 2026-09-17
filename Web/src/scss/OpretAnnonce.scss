@@ -1,0 +1,33 @@
+.opret-annonce {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  gap: 0.25rem;
+}
+
+.opret-annonce label {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* felter med fejl markeres ud fra aria-invalid, så vi ikke skal sætte en klasse også */
+.opret-annonce [aria-invalid="true"] {
+  border: 2px solid #c0392b;
+  background: #fdf3f2;
+}
+
+.opret-annonce .field-error {
+  margin: 0.25rem 0 0;
+  color: #c0392b;
+  font-size: 0.875rem;
+}
+
+.opret-annonce .submit-error {
+  margin-top: 1rem;
+  color: #c0392b;
+}
+
+.opret-annonce .success {
+  margin-top: 1rem;
+  color: #1e7e34;
+}

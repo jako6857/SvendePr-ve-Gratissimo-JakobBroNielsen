@@ -39,7 +39,6 @@ async function deleteFavorite(favoriteId) {
   if (!response.ok) {
     throw new Error("kunne ikke fjerne favorit");
   }
-  return response.json();
 }
 
-export { getFavorites, addFavorite, deleteFavorite, getFavoriteById };
+export { getFavorites, addFavorite, deleteFavorite };

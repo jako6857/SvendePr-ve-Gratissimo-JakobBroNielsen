@@ -2,20 +2,16 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getJobData } from "../api/jobs";
 import JobCard from "../components/JobCard";
-import JobCardExpanded from "../components/JobCardExpanded";
 import { getFavorites, addFavorite, deleteFavorite } from "../api/favorites";
 
 import SearchBar from "../components/SearchBar";
-// import jobCard from "";
-// import JobCardExpanded from "";
 
-const workHomeById = { 1: "On-site", 2: "Remote", 3: "Hybrid" }; //<-----reference til kommentar linje 39
+const workHomeById = { 1: "On-site", 2: "Remote", 3: "Hybrid" };
 const periodDaysById = { 1: 7, 2: 30, 3: 365 };
 
 function AlleJobs({ user }) {
   const [jobs, setJobs] = useState([]);
   const [sortBy, setSortBy] = useState("newest");
-  const [expandedJobId, setExpandedJobId] = useState(null);
   const [searchParams] = useSearchParams();
   const [favorites, setFavorites] = useState([]);
 
@@ -24,6 +20,46 @@ function AlleJobs({ user }) {
       .then((data) => setJobs(data))
       .catch((error) => console.error("Fejl ved hentning af jobs:", error));
   }, []);
+
+  //henter brugerens favoritter én gang, så vi ved hvilke jobs der allerede er gemt
+  useEffect(() => {
+    if (!user) {
+      setFavorites([]); //logger man ud, skal hjerterne nulstilles
+      return;
+    }
+    getFavorites()
+      .then((data) => setFavorites(data))
+      .catch((error) =>
+        console.error("Fejl ved hentning af favoritter:", error),
+      );
+  }, [user]);
+
+  //finder brugerens favorit for et bestemt job. undefined betyder "ikke gemt"
+  function findFavorite(jobId) {
+    return favorites.find((favorite) => favorite.jobListingId === jobId);
+  }
+
+  //gemmer i api'et og lægger den nye favorit ind i listen, så knappen skifter med det samme
+  async function handleAddFavorite(jobId) {
+    try {
+      const nyFavorit = await addFavorite(jobId);
+      setFavorites((prev) => [...prev, nyFavorit]);
+    } catch (error) {
+      console.error("Fejl ved gemme favorit:", error);
+    }
+  }
+
+  //sletter i api'et og filtrerer favoritten ud af listen
+  async function handleRemoveFavorite(favoriteId) {
+    try {
+      await deleteFavorite(favoriteId);
+      setFavorites((prev) =>
+        prev.filter((favorite) => favorite.id !== favoriteId),
+      );
+    } catch (error) {
+      console.error("Fejl ved fjernelse af favorit:", error);
+    }
+  }
 
   const search = searchParams.get("search") || "";
   const region = searchParams.get("region");
@@ -68,22 +104,16 @@ function AlleJobs({ user }) {
       </select>
 
       <div className="job-list">
-        {visibleJobs.map((job) =>
-          job.id === expandedJobId ? (
-            <JobCardExpanded
-              key={job.id}
-              job={job}
-              onClose={() => setExpandedJobId(null)}
-            />
-          ) : (
-            <JobCard
-              key={job.id}
-              job={job}
-              onOpen={setExpandedJobId}
-              user={user}
-            />
-          ),
-        )}
+        {visibleJobs.map((job) => (
+          <JobCard
+            key={job.id}
+            job={job}
+            user={user}
+            favorite={findFavorite(job.id)}
+            onAddFavorite={handleAddFavorite}
+            onRemoveFavorite={handleRemoveFavorite}
+          />
+        ))}
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createUser } from "../api/auth.js";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:4000/api";
 
@@ -7,6 +8,7 @@ const API_URL = "http://localhost:4000/api";
 
 export function useAuth() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const navigate = useNavigate();
 
   //login funtion som vi bruger i navbar og logind sidn,
   async function login(email, password) {

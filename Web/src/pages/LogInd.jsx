@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function LogInd({ login }) {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ export function LogInd({ login }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Skriv din Email..."
+        required
       />
       <label>Password</label>
       <input
@@ -32,12 +34,15 @@ export function LogInd({ login }) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Skriv dit Password..."
+        required
       />
 
       {error && <p>{error}</p>}
 
       <button type="submit">Log ind</button>
-      <button type="submit">Opret Bruger</button>
+      <Link to="/opret-profil" type="submit">
+        Opret Bruger
+      </Link>
     </form>
   );
 }

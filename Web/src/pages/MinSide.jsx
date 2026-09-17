@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { getFavorites, deleteFavorite } from "../api/favorites";
+import { getJobData, deleteJob } from "../api/jobs";
+import "../scss/JobCard.scss";
 
 function MinSide({ user }) {
   const [tab, setTab] = useState("annoncer");
   const [favorites, setFavorites] = useState([]);
+  const [myJobs, setMyJobs] = useState([]);
 
   useEffect(() => {
     if (!user) return;
@@ -11,6 +14,22 @@ function MinSide({ user }) {
       .then(setFavorites)
       .catch((error) =>
         console.error("Fejl ved hentning af favoritter:", error),
+      );
+  }, [user]);
+
+  //api'et har ingen rute til "mine annoncer", så vi henter alle og beholder dem brugeren selv har oprettet
+  useEffect(() => {
+    if (!user) return;
+    getJobData("job-listings")
+      .then((jobs) =>
+        setMyJobs(
+          jobs
+            .filter((job) => job.userId === user.id)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+        ),
+      )
+      .catch((error) =>
+        console.error("Fejl ved hentning af mine annoncer:", error),
       );
   }, [user]);
 
@@ -22,6 +41,19 @@ function MinSide({ user }) {
       );
     } catch (error) {
       console.error("Fejl ved fjernelse af favorit:", error);
+    }
+  }
+
+  async function handleDeleteJob(jobId) {
+    //en annonce kan ikke gendannes, så vi spørger før vi sletter
+    if (!window.confirm("Er du sikker på at du vil slette annoncen?")) {
+      return;
+    }
+    try {
+      await deleteJob(jobId);
+      setMyJobs((prev) => prev.filter((job) => job.id !== jobId));
+    } catch (error) {
+      console.error("Fejl ved sletning af annonce:", error);
     }
   }
 
@@ -46,6 +78,31 @@ function MinSide({ user }) {
         </button>
       </div>
 
+      {tab === "annoncer" && (
+        <div className="job-list">
+          {myJobs.length === 0 && (
+            <p>Du har ikke oprettet nogen annoncer endnu.</p>
+          )}
+          {myJobs.map((job) => (
+            <div key={job.id} className="job-card">
+              <div>
+                <p className="organization">{job.organization}</p>
+                <h2>{job.title}</h2>
+                <p>{job.description}</p>
+              </div>
+              <div>
+                <p>Lokation: {job.city}</p>
+                <p>
+                  Indrykket:{" "}
+                  {new Date(job.createdAt).toLocaleDateString("da-DK")}
+                </p>
+                <button onClick={() => handleDeleteJob(job.id)}>Slet</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {tab === "favoritter" && (
         <div className="favorite-list">
           {favorites.length === 0 && <p>Du har ingen favoritter endnu.</p>}
@@ -66,8 +123,6 @@ function MinSide({ user }) {
           ))}
         </div>
       )}
-
-      {tab === "annoncer" && <p>Mine annoncer kommer snart.</p>}
     </div>
   );
 }
