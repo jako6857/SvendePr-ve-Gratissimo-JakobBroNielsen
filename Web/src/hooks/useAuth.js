@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createUser } from "../api/auth.js";
 
 const API_URL = "http://localhost:4000/api";
 
@@ -25,6 +26,8 @@ export function useAuth() {
     localStorage.setItem("refreshToken", data.refreshToken);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
+
+    navigate("/min-side");
   }
 
   //og vores logud funktion som også clear brugeren localstorage
@@ -32,5 +35,11 @@ export function useAuth() {
     localStorage.clear();
     setUser(null);
   }
-  return { user, login, logout };
+
+  async function signup(userData) {
+    await createUser(userData);
+    await login(userData.email, userData.password);
+  }
+
+  return { user, login, logout, signup };
 }

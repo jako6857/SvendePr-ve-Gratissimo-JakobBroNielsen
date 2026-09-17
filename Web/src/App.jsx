@@ -13,7 +13,7 @@ import CtaBanner from "./components/CtaBanner.jsx";
 import Footer from "./components/Footer.jsx";
 
 function App() {
-  const { user, login, logout } = useAuth();
+  const { user, login, logout, signup } = useAuth();
   return (
     <>
       <Header />
@@ -22,11 +22,17 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Forside />} />
-        <Route path="/alle-jobs" element={<AlleJobs />} />
+        <Route
+          path="/alle-jobs"
+          element={<AlleJobs login={login} user={user} />}
+        />
         <Route path="/nyheder/:id" element={<NyhedsPage />} />
-        <Route path="/min-side" element={<MinSide />} />
+        <Route
+          path="/min-side"
+          element={<MinSide login={login} user={user} />}
+        />
         <Route path="/log-ind" element={<LogInd login={login} />} />
-        <Route path="/opret-profil" element={<OpretProfil />} />
+        <Route path="/opret-profil" element={<OpretProfil signup={signup} />} />
         <Route path="/opret-annonce" element={<OpretAnnonce />} />
       </Routes>
       <Footer />

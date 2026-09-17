@@ -1,3 +1,5 @@
+import { addFavorite, deleteFavorite } from "../api/favorites";
+
 function formatDate(dateString) {
   const date = new Date(dateString);
   return `d. ${date.getDate()}`;
@@ -5,11 +7,11 @@ function formatDate(dateString) {
 
 function JobCardExpanded({ job, onClose }) {
   return (
-    <div className="job-card-expanded">
-      <div className="job-card-expanded__left">
-        <p className="job-card-expanded__org">{job.organization}</p>
-        <h2 className="job-card-expanded__title">{job.title}</h2>
-        <p className="job-card-expanded__category">{job.jobCategory.name}</p>
+    <div className="job-card-container">
+      <div>
+        <p>{job.organization}</p>
+        <h2>{job.title}</h2>
+        <p>{job.jobCategory.name}</p>
 
         <h3>Beskrivelse</h3>
         <p>{job.description}</p>
@@ -21,8 +23,8 @@ function JobCardExpanded({ job, onClose }) {
         <p>Varierende opgaver aftalt løbende med organisationen.</p>
       </div>
 
-      <div className="job-card-expanded__right">
-        <div className="job-card-expanded__facts">
+      <div>
+        <div>
           <p>
             Lokation: <strong>{job.city}</strong>
           </p>
@@ -37,18 +39,25 @@ function JobCardExpanded({ job, onClose }) {
           </p>
         </div>
 
-        <div className="job-card-expanded__contact">
+        <div>
           <h3>Kontakt</h3>
           <p>{job.organization}</p>
           <p>Tlf: {job.user.phone}</p>
           <p>Email: {job.user.email}</p>
-          <p className="job-card-expanded__contact-att">
+          <p>
             Att: {job.user.firstname} {job.user.lastname}
           </p>
         </div>
 
-        <div className="job-card-expanded__actions">
-          <button className="btn btn--outline">Fjern ♥</button>
+        <div>
+          <button
+            className="fjernFavorit"
+            onClick={() =>
+              saved ? deleteFavorite(job.id) : addFavorite(job.id)
+            }
+          >
+            Fjern <img src="/Heart.png" alt="" className="btn-icon" />
+          </button>
           <button className="btn" onClick={onClose}>
             Luk
           </button>

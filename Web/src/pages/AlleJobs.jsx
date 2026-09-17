@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { getJobData } from "../api/jobs";
 import JobCard from "../components/JobCard";
 import JobCardExpanded from "../components/JobCardExpanded";
+import { getFavorites, addFavorite, deleteFavorite } from "../api/favorites";
 
 import SearchBar from "../components/SearchBar";
 // import jobCard from "";
@@ -11,11 +12,12 @@ import SearchBar from "../components/SearchBar";
 const workHomeById = { 1: "On-site", 2: "Remote", 3: "Hybrid" }; //<-----reference til kommentar linje 39
 const periodDaysById = { 1: 7, 2: 30, 3: 365 };
 
-function AlleJobs() {
+function AlleJobs({ user }) {
   const [jobs, setJobs] = useState([]);
   const [sortBy, setSortBy] = useState("newest");
   const [expandedJobId, setExpandedJobId] = useState(null);
   const [searchParams] = useSearchParams();
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     getJobData("job-listings")
@@ -37,7 +39,7 @@ function AlleJobs() {
     .filter((job) => !region || job.regionId === Number(region)) //hvis user ikke har valgt region.. så vis job ellers tjek om region og job matcher
     .filter((job) => !workType || job.workTypeId === Number(workType)) //her beholder vi kun de jobs som matcher workTypeID.
     .filter((job) => !category || job.jobCategoryId === Number(category)) //her kun dem som matcher jobCategoryID samme princip
-    .filter((job) => !workHome || job.workHome === workHomeById[workHome]) //den her er lidt anderledes, men det er derfor vi har sat den op i toppen af den her fil.
+    .filter((job) => !workHome || job.workHome === workHomeById[workHome])
 
     //den her er straks værre,
     .filter((job) => {
@@ -74,7 +76,12 @@ function AlleJobs() {
               onClose={() => setExpandedJobId(null)}
             />
           ) : (
-            <JobCard key={job.id} job={job} onOpen={setExpandedJobId} />
+            <JobCard
+              key={job.id}
+              job={job}
+              onOpen={setExpandedJobId}
+              user={user}
+            />
           ),
         )}
       </div>

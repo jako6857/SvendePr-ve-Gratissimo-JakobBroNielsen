@@ -26,7 +26,7 @@ function NavBar({ user, logout }) {
         </div>
         {user && (
           <div className="nav-auth alwaysbold">
-            <NavLink to="/MinSide">Min side</NavLink>
+            <NavLink to="/min-side">Min side</NavLink>
             <span className="divider"></span>
 
             <a onClick={logout}>Log ud</a>
