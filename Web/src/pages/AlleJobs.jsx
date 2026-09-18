@@ -4,7 +4,6 @@ import { getJobData } from "../api/jobs";
 import JobCard from "../components/JobCard";
 import { getFavorites, addFavorite, deleteFavorite } from "../api/favorites";
 import SearchBar from "../components/SearchBar";
-import "../scss/AlleJobs.scss";
 
 const workHomeById = { 1: "On-site", 2: "Remote", 3: "Hybrid" };
 const periodDaysById = { 1: 7, 2: 30, 3: 365 };

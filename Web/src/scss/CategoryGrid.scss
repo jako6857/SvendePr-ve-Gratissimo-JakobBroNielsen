@@ -48,3 +48,13 @@
   padding-left: 16px;
   flex: 1; //bruger alt plads som er tilladt, så den ikke overlapper med counten
 }
+
+@media (max-width: 768px) {
+  .category-grid-section {
+    padding: 24px 16px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}

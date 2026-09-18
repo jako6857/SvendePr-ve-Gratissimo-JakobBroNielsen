@@ -1,4 +1,4 @@
-@use "variables" as *;
+@use "_variables" as *;
 
 .testimonials-title {
   color: $primary-red;
@@ -60,5 +60,16 @@ article {
       background: #95260d;
       outline-color: #95260d;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-title {
+    font-size: 24px;
+    padding: 20px;
+  }
+
+  .testimonials-content {
+    font-size: 18px;
   }
 }

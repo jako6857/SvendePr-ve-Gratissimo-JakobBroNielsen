@@ -75,3 +75,22 @@ select {
   cursor: pointer;
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .filter-row {
+    flex-wrap: wrap;
+  }
+
+  .search-input-row {
+    flex-direction: column;
+
+    input {
+      border-radius: 30px;
+      margin-bottom: 8px;
+    }
+
+    button {
+      border-radius: 30px;
+    }
+  }
+}
