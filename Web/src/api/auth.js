@@ -15,4 +15,36 @@ async function createUser(userData) {
   return response.json();
 }
 
-export { createUser };
+async function getMyProfile() {
+  const token = localStorage.getItem("accessToken");
+  const response = await fetch(`${API_URL}/users`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!response.ok) {
+    throw new Error("Kunne ikke hente profilen");
+  }
+  //api'et svarer med en liste der kun indeholder én bruger, så vi tager den første
+  const users = await response.json();
+  return users[0];
+}
+
+async function updateMyProfile(userData) {
+  const token = localStorage.getItem("accessToken");
+  const response = await fetch(`${API_URL}/users`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.error);
+  }
+  return response.json();
+}
+
+export { createUser, getMyProfile, updateMyProfile };

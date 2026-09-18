@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { getFavorites, deleteFavorite } from "../api/favorites";
 import { getJobData, deleteJob } from "../api/jobs";
+import { Link } from "react-router-dom";
+import RedigerProfil from "../components/RedigerProfil";
 import "../scss/JobCard.scss";
+import "../scss/MinSide.scss";
 
-function MinSide({ user }) {
+function MinSide({ user, logout }) {
   const [tab, setTab] = useState("annoncer");
   const [favorites, setFavorites] = useState([]);
   const [myJobs, setMyJobs] = useState([]);
@@ -61,21 +64,34 @@ function MinSide({ user }) {
 
   return (
     <div className="min-side">
-      <h1>Velkommen {user.firstname}</h1>
+      <div className="min-side-header">
+        <h1>Velkommen {user.firstname}</h1>
+        <p>
+          Rediger eller slet dine annoncer. Du kan også danne dig et overblik
+          over de annoncer du har gemt som favorit, samt fjerne dem igen.
+        </p>
 
-      <div className="tabs">
-        <button
-          className={tab === "annoncer" ? "active" : ""}
-          onClick={() => setTab("annoncer")}
-        >
-          Mine annoncer
-        </button>
-        <button
-          className={tab === "favoritter" ? "active" : ""}
-          onClick={() => setTab("favoritter")}
-        >
-          Mine favoritter
-        </button>
+        <div className="min-side-links">
+          <a onClick={logout}>Log ud</a>
+          <Link to="/rediger-profil">Rediger Profil</Link>
+        </div>
+      </div>
+
+      <div className="min-side-tabs">
+        <div className="tabs">
+          <button
+            className={tab === "annoncer" ? "active" : ""}
+            onClick={() => setTab("annoncer")}
+          >
+            Mine annoncer
+          </button>
+          <button
+            className={tab === "favoritter" ? "active" : ""}
+            onClick={() => setTab("favoritter")}
+          >
+            Mine favoritter
+          </button>
+        </div>
       </div>
 
       {tab === "annoncer" && (

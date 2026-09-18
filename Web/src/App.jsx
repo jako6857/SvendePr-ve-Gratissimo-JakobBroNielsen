@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar.jsx";
 import Header from "./components/Header.jsx";
 import CtaBanner from "./components/CtaBanner.jsx";
 import Footer from "./components/Footer.jsx";
+import RedigerProfil from "./components/RedigerProfil.jsx";
 
 function App() {
   const { user, login, logout, signup } = useAuth();
@@ -29,8 +30,10 @@ function App() {
         <Route path="/nyheder/:id" element={<NyhedsPage />} />
         <Route
           path="/min-side"
-          element={<MinSide login={login} user={user} />}
+          element={<MinSide user={user} logout={logout} />}
         />
+        <Route path="/rediger-profil" element={<RedigerProfil user={user} />} />
+
         <Route path="/log-ind" element={<LogInd login={login} />} />
         <Route path="/opret-profil" element={<OpretProfil signup={signup} />} />
         <Route path="/opret-annonce" element={<OpretAnnonce user={user} />} />

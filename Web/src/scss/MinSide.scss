@@ -1,0 +1,60 @@
+@import "variables";
+
+.min-side-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.min-side-header {
+  position: relative;
+  background: $alternativ-hvid;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.min-side-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.min-side-header p {
+  max-width: 40rem;
+  margin: 0 auto;
+  color: #555;
+}
+
+.min-side-links {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.min-side-links a {
+  color: $primary-red;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tabs {
+  display: inline-flex;
+  margin: 2rem;
+  border: 1px solid $primary-red;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tabs button {
+  padding: 0.75rem 2rem;
+  border: none;
+  background: $alternativ-hvid;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: $primary-red;
+  color: #fff;
+}
